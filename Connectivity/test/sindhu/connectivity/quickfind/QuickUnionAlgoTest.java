@@ -20,16 +20,19 @@ public class QuickUnionAlgoTest {
 		assertEquals(4, input[3]);
 
 		algo.union(0, 4);
-		// expected {4 1 2 4 4}
-		assertEquals(4, input[0]);
+		// expected {1 4 2 4 4}
+		assertEquals(1, input[0]);
+		assertEquals(4, input[1]);
 
 		algo.union(1, 2);
-		// expected {4 2 2 4 4}
-		assertEquals(2, input[1]);
+		// expected {1 4 2 4 2}
+		assertEquals(4, input[1]);
+		assertEquals(2, input[2]);
 		
 		algo.union(4, 1);
-		// expected {4 2 2 4 2}
-		assertEquals(2, input[4]);
+		// expected {1 4 2 4 2} no change
+		assertEquals(4, input[1]);
+		assertEquals(2, input[2]);
 	}
 
 	@Test

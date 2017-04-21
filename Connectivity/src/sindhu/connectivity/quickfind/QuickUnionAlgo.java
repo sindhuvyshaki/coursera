@@ -8,7 +8,13 @@ public class QuickUnionAlgo extends QuickFindAlgo {
 
 	@Override
 	public void union(int indexP, int indexQ) {
-		array[indexP] = array[indexQ];
+		int rootP = getRoot(indexP);
+		int rootQ = getRoot(indexQ);
+
+		if (rootP == rootQ) {
+			return;
+		}
+		array[rootP] = array[rootQ];
 	}
 
 	@Override
@@ -22,10 +28,7 @@ public class QuickUnionAlgo extends QuickFindAlgo {
 		return false;
 	}
 
-	private int getRoot(int index) {
-		if (array[index] == index) {
-			return index;
-		}
-		return getRoot(array[index]);
+	protected int getRoot(int index) {
+		return array[index] == index ? index : getRoot(array[index]);
 	}
 }
