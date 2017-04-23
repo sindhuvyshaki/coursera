@@ -15,16 +15,17 @@ public class WeightedQuickUnionAlgo extends QuickUnionAlgo {
 	public void union(int indexP, int indexQ) {
 		int rootP = getRoot(indexP);
 		int rootQ = getRoot(indexQ);
-		
-		int heightP = size[indexP];
-		int heightQ = size[indexQ];
 
-		if (heightP <= heightQ) {
+		if (rootP == rootQ) {
+			return;
+		}
+
+		if (size[rootP] <= size[rootQ]) {
 			array[indexP] = rootQ;
-			size[indexP] ++;
+			size[rootQ] += size[rootP];
 		} else {
 			array[indexQ] = rootP;
-			size[indexQ] ++;
+			size[rootP] += size[rootQ];
 		}
 	}
 

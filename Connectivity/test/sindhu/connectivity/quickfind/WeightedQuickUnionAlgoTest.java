@@ -29,5 +29,18 @@ public class WeightedQuickUnionAlgoTest {
 		
 		assertTrue(algo.isConnected(0, 4));
 	}
+	
+	@Test
+	public void testUnionWithRootAndNode() {
+		WeightedQuickUnionAlgo algo = new WeightedQuickUnionAlgo(5); // {0 1 2 3 4}
+		int[] array = algo.getInput();
+		algo.union(0, 1);
+		// expected {1 1 2 3 4}  1 > 0
+		assertEquals(1, array[0]);
+		
+		algo.union(1, 2);
+		// expected {1 1 1 3 4}
+		assertEquals(1, array[2]);
+	}
 
 }
