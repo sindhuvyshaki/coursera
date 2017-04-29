@@ -5,7 +5,7 @@ public class PercolationStats {
 	private int size;
 	private int trials;
 	private double[] thresholdArray;
-	
+
 	public PercolationStats(int n, int trials) {
 		if (n <= 0 || trials <= 0) {
 			throw new IllegalArgumentException();
@@ -30,33 +30,13 @@ public class PercolationStats {
 		return mean() + ((1.96 * stddev()) / Math.sqrt(trials));
 	} // high endpoint of 95% confidence interval
 
-	private void printPermutation() {
-		int[] randomizedArray = StdRandom.permutation(size * size);
-		int[][] grid = new int[size][size];
-		for (int i = 0; i < randomizedArray.length; i ++) {
-			grid[randomizedArray[i] / size][randomizedArray[i] % size] = size;
-			printGrid(grid, size);
-		}
-	}
-	
-	private static void printGrid(int[][] grid, int size) {
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				System.out.print(grid[i][j]);
-				System.out.print("\t");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-	
 	public static void main(String[] args) {
 		int _size = Integer.parseInt(args[0]);
 		int _trials = Integer.parseInt(args[1]);
-		
+
 		Percolation percolation = null;
 		PercolationStats stats = new PercolationStats(_size, _trials);
-//		stats.printPermutation();
+		// stats.printPermutation();
 
 		stats.thresholdArray = new double[stats.trials];
 
@@ -65,14 +45,13 @@ public class PercolationStats {
 		while (thresholdCount != stats.trials) {
 			percolation = new Percolation(stats.size);
 			int[] randomizedArray = StdRandom.permutation(stats.size * stats.size);
-			for (int i = 0; i < stats.size * stats.size; i ++) {
+			for (int i = 0; i < stats.size * stats.size; i++) {
 				percolation.open(randomizedArray[i] / stats.size, randomizedArray[i] % stats.size);
-				openCount ++;
+				openCount++;
 				if (percolation.percolates()) {
-					PercolationStats.printGrid(percolation.getGrid(), stats.size);
 					System.out.println("Open sites : " + percolation.numberOfOpenSites());
-					stats.thresholdArray[thresholdCount] = (double) openCount/ (stats.size * stats.size);
-					thresholdCount ++;
+					stats.thresholdArray[thresholdCount] = (double) openCount / (stats.size * stats.size);
+					thresholdCount++;
 					openCount = 0;
 					break;
 				}

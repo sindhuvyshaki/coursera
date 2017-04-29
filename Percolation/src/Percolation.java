@@ -22,8 +22,9 @@ public class Percolation {
 	}
 
 	private void validate(int row, int col) {
-		if (row < 0 || row > size - 1 || col < 0 || col > size - 1)
+		if (row < 0 || row > size - 1 || col < 0 || col > size - 1) {
 			throw new IllegalArgumentException();
+		}
 	}
 
 	// open site (row, col) if it is not open already
@@ -101,10 +102,6 @@ public class Percolation {
 	public static void main(String[] args) {
 	}
 
-	public int[][] getGrid() {
-		return grid;
-	}
-
 	private boolean isConnected(int x1, int y1, int x2, int y2) {
 		return getRoot(x1, y1) == getRoot(x2, y2) ? true : false;
 	}
@@ -136,9 +133,5 @@ public class Percolation {
 		}
 
 		return getRoot(grid[x][y] / size, grid[x][y] % size);
-	}
-
-	public int[][] getTreeSize() {
-		return treeSize;
 	}
 }
